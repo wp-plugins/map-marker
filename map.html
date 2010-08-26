@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>jQuery Hoverbox</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+html {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    /*margin: 50px 100px*/
+	width:763px;
+	height:392px;
+	margin:0px;
+	padding:0px;
+}
+#tooltip {
+    padding: 5px 10px;
+    background: #cad7e0;
+    border: 1px solid #b2bdc3;
+    opacity: 0.90;
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="js/jquery.hoverbox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type: "GET",
+		url: "map.xml",
+		dataType: "xml",
+		success: function(xml) {
+			$(xml).find('map').each(function(){
+				$(this).find('country').each(function(){
+					var name = $(this).find('name').text();
+					var description = $(this).find('description').text();
+					var treated = $(this).find('treated').text();
+					var coords = $(this).find('coords').text();
+					coords = coords.split(',');
+					var left = coords[0];
+					var top = coords[1];
+					$('#map').append('<span title="<center><h4>'+name+'</h4></center>'+description+'<br />'+treated+'"><img src="images/marker.png" style="margin:0px; margin-left:'+left+'px; margin-top:'+top+'px; width:10px; height:10px; padding:0; position:fixed;" /></span>');
+					$(function(){
+						$('span').hoverbox();
+					});
+				});
+			});
+		}
+	});
+});
+
+</script>
+</head>
+<body>
+<div id="map" style="background-image:url(images/world-map.jpg); background-repeat:no-repeat; width:763px; height:392px;">
+</div>
+</body>
+</html>

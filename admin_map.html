@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<style>
+#tooltip {
+    padding: 5px 10px;
+    background: #cad7e0;
+    border: 1px solid #b2bdc3;
+    opacity: 0.90;
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="js/jquery.hoverbox.min.js"></script>
+<script type="text/javascript" src="js/greybox.js"></script>
+<link href="greybox.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type: "GET",
+		url: "map.xml",
+		dataType: "xml",
+		success: function(xml) {
+			$(xml).find('map').each(function(){
+				$(this).find('country').each(function(){
+					var name = $(this).find('name').text();
+					var description = $(this).find('description').text();
+					var treated = $(this).find('treated').text();
+					var coords = $(this).find('coords').text();
+					coords = coords.split(',');
+					var left = coords[0];
+					var top = coords[1];
+					$('#map').append('<span title="<center><h4>'+name+'</h4></center>'+description+'<br />'+treated+'"><img src="images/marker.png" style="margin:0px; margin-left:'+left+'px; margin-top:'+top+'px; width:10px; height:10px; padding:0; position:fixed;" /></span>');
+					$(function(){
+						$('span').hoverbox();
+					});
+				});
+			});
+		}
+	});
+	
+	$('#map').click(function(event){
+	  var x = event.pageX - this.offsetLeft;
+	  var y = event.pageY - this.offsetTop;
+	  var GB_ANIMATION = true;
+	  var t = "Add a new marker!";
+  	  var coords = x+','+y;
+
+	  GB_show(t,"admin_add.php?coords="+coords,200,310);
+	  return false;
+	  
+	});
+
+});
+</script>
+
+<title>Add new marker</title>
+</head>
+<body onload="window.parent.deletemarkers.location.reload();">
+<div id="map" style="background-image:url(images/world-map.jpg); background-repeat:no-repeat; width:763px; height:392px;"></div>
+</body>
+</html>

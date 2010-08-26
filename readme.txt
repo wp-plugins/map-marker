@@ -1,6 +1,6 @@
 === Map Marker ===
 Contributors: mikeaag
-Tag: map
+Tags: map
 Donate link:
 Requires at least: 3.0.1
 Tested up to: 3.0.1

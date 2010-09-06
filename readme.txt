@@ -30,6 +30,9 @@ Map Marker is still being developed. Please be patient.
 
 == Changelog ==
 
+= 0.4.2 =
+* Change to fix IE 6 Compatibility Issue.
+
 = 0.4 =
 * First version to be put in directory.
 

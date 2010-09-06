@@ -3,7 +3,7 @@
 Plugin Name: Map Marker 
 Plugin URI: http://xenonsoft.co.uk/wp_plugins/map_markers
 Description: Add Markers with description to a map! 
-Version: 0.4.1 
+Version: 0.4.2 
 Author: Mike Gatward 
 Author URI: http://xenonsoft.co.uk/wp_plugins 
 */
